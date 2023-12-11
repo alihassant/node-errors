@@ -67,25 +67,37 @@ const accessLogStream = fs.createWriteStream(
   { flags: "a" }
 );
 
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     useDefaults: true,
+//     directives: {
+//       "default-src": ["*"],
+//       "script-src-attr": ["'self'", "'unsafe-inline'"],
+//       "script-src": [
+//         "'self'",
+//         "'unsafe-inline'",
+//         "'unsafe-eval'",
+//         "https://js.stripe.com",
+//         "https://connect-js.stripe.com",
+//       ],
+//       "style-src": [
+//         "'self'",
+//         "'unsafe-inline'",
+//         "fonts.googleapis.com",
+//       ],
+//       "frame-src": ["'self'", "js.stripe.com"],
+//       "font-src": ["'self'", "fonts.googleapis.com", "fonts.gstatic.com"],
+//     },
+//   })
+// );
+
 app.use(
   helmet.contentSecurityPolicy({
-    useDefaults: true,
     directives: {
-      "default-src": ["*"],
+      "default-src": ["'self'"],
       "script-src-attr": ["'self'", "'unsafe-inline'"],
-      "script-src": [
-        "'self'",
-        "'unsafe-inline'",
-        "'unsafe-eval'",
-        "'https://js.stripe.com'",
-        "'https://connect-js.stripe.com'",
-      ],
-      "style-src": [
-        "'self'",
-        "'unsafe-inline'",
-        "fonts.googleapis.com",
-        "js.stripe.com",
-      ],
+      "script-src": ["'self'", "'unsafe-inline'", "js.stripe.com"],
+      "style-src": ["'self'", "'unsafe-inline'", "fonts.googleapis.com"],
       "frame-src": ["'self'", "js.stripe.com"],
       "font-src": ["'self'", "fonts.googleapis.com", "fonts.gstatic.com"],
     },
